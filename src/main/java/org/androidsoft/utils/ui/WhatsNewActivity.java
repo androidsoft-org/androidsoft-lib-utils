@@ -64,23 +64,31 @@ public abstract class WhatsNewActivity extends NoTitleActivity
         if (lastVersion < currentVersion)
         {
             int resTitle;
-            int resMessage;
+            String resMessage;
             if (lastVersion == DEFAULT_VERSION)
             {
                 // This is a new install
                 resTitle = getFirstRunDialogTitleRes();
-                resMessage = getFirstRunDialogMsgRes();
+                resMessage = getFirstRunDialogMsgString();
             }
             else
             {
                 // This is an upgrade.
                 resTitle = getWhatsNewDialogTitleRes();
-                resMessage = getWhatsNewDialogMsgRes();
+                resMessage = getWhatsNewDialogMsgString();
             }
             // show what's new message
             saveVersion(currentVersion);
             showWhatsNewDialog(resTitle, resMessage);
         }
+    }
+
+    public String getFirstRunDialogMsgString() {
+        return getResources().getString(getFirstRunDialogMsgRes());
+    }
+
+    public String getWhatsNewDialogMsgString() {
+        return getResources().getString(getWhatsNewDialogMsgRes());
     }
 
     /**
@@ -110,7 +118,7 @@ public abstract class WhatsNewActivity extends NoTitleActivity
      * @param title The dialog's title
      * @param message The dialog's message
      */
-    private void showWhatsNewDialog(int title, int message)
+    private void showWhatsNewDialog(int title, String message)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(title);
